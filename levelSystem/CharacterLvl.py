@@ -8,7 +8,7 @@ START_BRESISTANCE = 1
 class CharacterLvl:
       def calculate(self, atLvl):
           def calc_addit(lvlNum, addit):
-              return round(lvlNum*addit)
+              return lvlNum*addit
           if atLvl <100:
              return {'AD':START_AD+calc_addit(atLvl,0.7),
                     'AP':START_AD+calc_addit(atLvl,0.7),
@@ -16,5 +16,8 @@ class CharacterLvl:
                     'BRES':START_BRESISTANCE+calc_addit(atLvl,0.7)}
 if __name__ == "__main__":
 	cl = CharacterLvl()
-	print "Stats bei LVL 12:"
-	print cl.calculate(12)	
+	for i in range(1,12):
+		print "-"*9+"\n"
+		print "Stats bei LVL "
+		print i
+		print cl.calculate(i)
