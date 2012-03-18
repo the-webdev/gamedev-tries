@@ -1,23 +1,23 @@
-import math, const
-START_AD = 10
-MAX_LEVELS = 100
-START_MRESISTANCE = 3
-START_HP = 50
-START_AP = 7
-START_BRESISTANCE = 1
+import CharacterValues
 class CharacterLvl:
-      def calculate(self, atLvl):
-          def calc_addit(lvlNum, addit):
-              return lvlNum*addit
-          if atLvl <100:
-             return {'AD':START_AD+calc_addit(atLvl,0.7),
-                    'AP':START_AD+calc_addit(atLvl,0.7),
-                    'MRES':START_MRESISTANCE+calc_addit(atLvl,0.7),
-                    'BRES':START_BRESISTANCE+calc_addit(atLvl,0.7)}
-if __name__ == "__main__":
-	cl = CharacterLvl()
-	for i in range(1,12):
-		print "-"*9+"\n"
-		print "Stats bei LVL "
-		print i
-		print cl.calculate(i)
+  additValues = {}
+  startValues = {}
+  def CharacterLvl(self, ch):
+    if type(ch) == type(CharacterValues()):
+            if(ch.dict_additiveValues != {}) and (ch.dict_startValues != {}):
+                self.additValues = ch.dict_additiveValues
+                self.startValues = ch.dict_startValues  
+  def calculate(self, atLvl):
+    def calc_addit(lvlNum, addit):
+          return lvlNum*addit
+    if atLvl <100:
+        #return {'HEALTH':self.startValues['HEALTH']+calc_addit(atLvl,self.additValues['HEALTH']),
+        #       'AD':self.startValues['AD']+calc_addit(atLvl,self.additValues['AD']),
+        #      'AP':self.startValues['AP']+calc_addit(atLvl,self.additValues['AP']),
+        #     'MRES':self.startValues['MRES']+calc_addit(atLvl,self.additValues['MRES'],
+        #    'ARMOR':self.startValues['ARMOR']+calc_addit(atLvl,self.additValues['ARMOR'])}             
+      return dict(HEALTH=self.startValues['HEALTH']+calc_addit(atLvl,self.additValues['HEALTH']),
+                  AD=self.startValues['AD']+calc_addit(atLvl,self.additValues['AD']),
+                  AP=self.startValues['AP']+calc_addit(atLvl,self.additValues['AP']),
+                  MRES=self.startValues['MRES']+calc_addit(atLvl,self.additValues['MRES']),
+                  ARMOR=self.startValues['ARMOR']+calc_addit(atLvl,self.additValues['ARMOR'])
